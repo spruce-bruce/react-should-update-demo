@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import shallowCompare from 'react-addons-shallow-compare';
 
 let initialQuadrants = [
     {
@@ -86,6 +87,13 @@ class Quadrant extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.updating) {
+            return shallowCompare(this, nextProps, nextState);
+        }
+        return true;
+    }
+
     handleClick() {
         const { quadId } = this.props;
         this.props.onClick(quadId, 'num');
@@ -131,6 +139,14 @@ class Middle extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.updating) {
+            return shallowCompare(this, nextProps, nextState);
+        }
+
+        return true;
+    }
+
     handleClick(e) {
         e.stopPropagation();
         const { quadId } = this.props;
@@ -160,12 +176,19 @@ class Inner extends Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.updating) {
+            return shallowCompare(this, nextProps, nextState);
+        }
+
+        return true;
+    }
+
     handleClick(e) {
         e.stopPropagation();
         const { quadId } = this.props;
         this.props.onClick(quadId, 'innerNum');
     }
-
 
     render() {
         const style = {...styles.inner};
