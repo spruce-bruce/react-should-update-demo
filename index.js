@@ -44,8 +44,12 @@ let innerRenderCounts = [0,0,0,0];
 class App extends Component{
     constructor(props) {
         super(props);
-        this.state = {quadrants: initialQuadrants};
+        this.state = {
+            quadrants: initialQuadrants,
+            shouldComponentUpdate: false,
+        };
         this.handleChange = this.handleChange.bind(this);
+        this.handleToggleShouldComponentUpdate = this.handleToggleShouldComponentUpdate.bind(this);
     }
 
     handleChange(quadId, idx) {
@@ -56,14 +60,21 @@ class App extends Component{
         this.setState({quadrants});
     }
 
+    handleToggleShouldComponentUpdate() {
+        this.setState({shouldComponentUpdate: !this.state.shouldComponentUpdate});
+    }
+
     render() {
-        const { quadrants } = this.state;
+        const { quadrants, shouldComponentUpdate } = this.state;
         return (
-            <div style={styles.container}>
-                <Quadrant onClick={this.handleChange} quadId={0} {...quadrants[0]} />
-                <Quadrant onClick={this.handleChange} quadId={1} {...quadrants[1]} />
-                <Quadrant onClick={this.handleChange} quadId={2} {...quadrants[2]} />
-                <Quadrant onClick={this.handleChange} quadId={3} {...quadrants[3]} />
+            <div style={{width: '100%', height: '100%'}}>
+                <input onChange={this.handleToggleShouldComponentUpdate} type='checkbox' /><span>shouldComponentUpdate: {shouldComponentUpdate ? 'on' : 'off'}</span>
+                <div style={styles.container}>
+                    <Quadrant updating={shouldComponentUpdate} onClick={this.handleChange} quadId={0} {...quadrants[0]} />
+                    <Quadrant updating={shouldComponentUpdate} onClick={this.handleChange} quadId={1} {...quadrants[1]} />
+                    <Quadrant updating={shouldComponentUpdate} onClick={this.handleChange} quadId={2} {...quadrants[2]} />
+                    <Quadrant updating={shouldComponentUpdate} onClick={this.handleChange} quadId={3} {...quadrants[3]} />
+                </div>
             </div>
         );
     }
@@ -89,7 +100,8 @@ class Quadrant extends Component{
             middleNum,
             innerColor,
             innerNum,
-            onClick
+            onClick,
+            updating
         } = this.props;
 
         if (color) {
@@ -106,6 +118,7 @@ class Quadrant extends Component{
                     innerColor={innerColor}
                     innerNum = {innerNum}
                     onClick = {onClick}
+                    updating = {updating}
                 />
             </div>
         );
@@ -126,7 +139,7 @@ class Middle extends Component{
 
     render() {
         const style = {...styles.middle};
-        const { color, quadId, innerColor, innerNum, onClick } = this.props;
+        const { color, quadId, innerColor, innerNum, onClick, updating } = this.props;
 
         if (color) {
             style.backgroundColor = color;
@@ -135,7 +148,7 @@ class Middle extends Component{
         return (
             <div style={style} onClick={this.handleClick}>
                 <span style={{textAlign: 'center', paddingRight: '10px'}}>{++midRenderCounts[quadId]}</span>
-                <Inner color={innerColor} num={innerNum} quadId={quadId} onClick={onClick} />
+                <Inner color={innerColor} num={innerNum} quadId={quadId} onClick={onClick} updating={updating} />
             </div>
         );
     }
