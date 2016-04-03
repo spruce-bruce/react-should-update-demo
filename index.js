@@ -88,7 +88,8 @@ class Quadrant extends Component{
             middleColor,
             middleNum,
             innerColor,
-            innerNum
+            innerNum,
+            onClick
         } = this.props;
 
         if (color) {
@@ -104,6 +105,7 @@ class Quadrant extends Component{
                     quadId={quadId}
                     innerColor={innerColor}
                     innerNum = {innerNum}
+                    onClick = {onClick}
                 />
             </div>
         );
@@ -111,34 +113,57 @@ class Quadrant extends Component{
 }
 
 class Middle extends Component{
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.stopPropagation();
+        const { quadId } = this.props;
+        this.props.onClick(quadId, 'middleNum');
+    }
+
     render() {
         const style = {...styles.middle};
-        const { color, quadId, innerColor, innerNum } = this.props;
+        const { color, quadId, innerColor, innerNum, onClick } = this.props;
 
         if (color) {
             style.backgroundColor = color;
         }
 
         return (
-            <div style={style}>
+            <div style={style} onClick={this.handleClick}>
                 <span style={{textAlign: 'center', paddingRight: '10px'}}>{++midRenderCounts[quadId]}</span>
-                <Inner color={innerColor} num={innerNum} quadId={quadId}/>
+                <Inner color={innerColor} num={innerNum} quadId={quadId} onClick={onClick} />
             </div>
         );
     }
 }
 
 class Inner extends Component{
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.stopPropagation();
+        const { quadId } = this.props;
+        this.props.onClick(quadId, 'innerNum');
+    }
+
+
     render() {
         const style = {...styles.inner};
-        const { color, quadId } = this.props;
+        const { color, quadId, onClick } = this.props;
 
         if (color) {
             style.backgroundColor = color;
         }
 
         return (
-            <div style={style}>
+            <div style={style} onClick={this.handleClick}>
                 <span style={{textAlign: 'center', paddingRight: '10px'}}>{++innerRenderCounts[quadId]}</span>
             </div>
         );
