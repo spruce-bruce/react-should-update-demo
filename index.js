@@ -118,7 +118,7 @@ class Quadrant extends Component{
 
         return (
             <div style={style} onClick={this.handleClick}>
-                <span style={{textAlign: 'center', paddingRight: '10px'}}>{++quadRenderCounts[quadId]}</span>
+                <span style={styles.text}>{++quadRenderCounts[quadId]}</span>
                 <Middle
                     color={middleColor}
                     num={middleNum}
@@ -163,7 +163,7 @@ class Middle extends Component{
 
         return (
             <div style={style} onClick={this.handleClick}>
-                <span style={{textAlign: 'center', paddingRight: '10px'}}>{++midRenderCounts[quadId]}</span>
+                <span style={styles.text}>{++midRenderCounts[quadId]}</span>
                 <Inner color={innerColor} num={innerNum} quadId={quadId} onClick={onClick} updating={updating} />
             </div>
         );
@@ -200,7 +200,7 @@ class Inner extends Component{
 
         return (
             <div style={style} onClick={this.handleClick}>
-                <span style={{textAlign: 'center', paddingRight: '10px'}}>{++innerRenderCounts[quadId]}</span>
+                <span style={styles.text}>{++innerRenderCounts[quadId]}</span>
             </div>
         );
     }
@@ -233,7 +233,11 @@ const styles = {
         display : 'flex',
         justifyContent : 'center',
         alignItems : 'center'
-
+    },
+    text : {
+        textAlign: 'center',
+        paddingRight: '10px',
+        fontSize: '2em'
     }
 }
 
