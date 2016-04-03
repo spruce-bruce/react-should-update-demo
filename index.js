@@ -5,7 +5,6 @@ let initialQuadrants = [
     {
         color: '#808D8E',
         num: 0,
-        middle: {color: '#87a6c1', num: 0},
         middleColor : '#87a6c1',
         middleNum : 0,
         innerColor : '#7A92F4',
@@ -27,7 +26,6 @@ let initialQuadrants = [
         middleNum : 0,
         innerColor : '#FF00E5',
         innerNum : 0,
-
     },
     {
         color: '#A3A5C3',
@@ -169,8 +167,8 @@ const styles = {
         alignItems : 'center'
     },
     inner : {
-        width : '80%',
-        height : '80%',
+        width : '70%',
+        height : '70%',
         display : 'flex',
         justifyContent : 'center',
         alignItems : 'center'
