@@ -8,7 +8,6 @@ var path          = require('path');
 var request       = require('request');
 var webpack       = require('webpack');
 var webpackConfig = require('./webpack.config');
-//var proxy         = require('express-http-proxy');
 var express       = require('express');
 
 var app        = express();
