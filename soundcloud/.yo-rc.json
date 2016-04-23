@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "soundcloud",
+    "style": "css",
+    "postcss": false
+  }
+}
