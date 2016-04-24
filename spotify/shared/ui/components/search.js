@@ -3,6 +3,19 @@ import { connect } from 'react-redux';
 import { search } from '../../redux/actions/spotify';
 import AlbumListItem from './album-list-item';
 
+const styles = {
+  searchInput: {
+    fontSize: 30,
+    float: 'left',
+  },
+  searchButton: {
+    marginLeft: 10,
+    width: 100,
+    height: 40,
+    float: 'left',
+  },
+};
+
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +53,18 @@ class Search extends Component {
     const loader = <img src = "/static-media/ajax-loader.gif" />;
     return (
       <form onSubmit={this.submit}>
-        <input type="text" value={this.state.query} onChange={this.queryChange} />
-        <button>Search</button>
+        <div style={{ marginBottom: 10 }}>
+          <input
+            style={styles.searchInput}
+            type="text"
+            value={this.state.query}
+            onChange={this.queryChange}
+          />
+
+          <button style={styles.searchButton}>Search</button>
+          <div style={{ clear: 'both' }} />
+        </div>
+
         {searchResults.loading ? loader : ''}
         {searchResults.response ? this.renderAlbums() : ''}
       </form>

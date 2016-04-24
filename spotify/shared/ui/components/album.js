@@ -3,6 +3,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAlbum } from '../../redux/actions/spotify';
 
+const styles = {
+  imgStyles: {
+    display: 'block',
+    float: 'left',
+  },
+  rightPane: {
+    float: 'left',
+    fontSize: '25',
+    marginLeft: 10,
+  },
+  h1Styles: {
+    marginTop: 0,
+    marginBottom: 0,
+  },
+};
+
 class Album extends Component {
   componentWillMount() {
     this.props.dispatch(getAlbum(this.props.params.albumId));
@@ -12,10 +28,12 @@ class Album extends Component {
     const album = this.props.album.response.album;
     return (
       <div>
-        <img src = {album.images[0].url} />
-        <h1 className="h1">{album.name}</h1>
-        <div>{album.release_date}</div>
-        <div>{this.renderTracks(album.tracks)}</div>
+        <img style={styles.imgStyles} src = {album.images[0].url} />
+        <div style={styles.rightPane}>
+          <h1 style={styles.h1Styles} className="h1">{album.name}</h1>
+          <div>{album.release_date}</div><br />
+          <div>{this.renderTracks(album.tracks)}</div>
+        </div>
       </div>
     );
   }
