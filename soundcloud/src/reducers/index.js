@@ -8,5 +8,5 @@
  */
 import { combineReducers } from 'redux';
 /* Populated by react-webpack-redux:reducer */
-const reducers = {};
+const reducers = { spotify: require('../reducers/spotify.js') };
 module.exports = combineReducers(reducers);

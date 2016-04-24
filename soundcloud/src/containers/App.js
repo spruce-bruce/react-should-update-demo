@@ -14,8 +14,13 @@ import Main from '../components/Main';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   render() {
-    const {actions} = this.props;
-    return <Main actions={actions}/>;
+      const {actions, spotify} = this.props;
+      console.log(actions);
+    return (
+      <Main actions={actions} spotify={spotify}>
+        {this.props.children}
+      </Main>
+    );
   }
 }
 /* Populated by react-webpack-redux:reducer
@@ -24,17 +29,19 @@ class App extends Component {
  *       adjust it here.
  */
 App.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  spotify: PropTypes.object.isRequired
 };
 function mapStateToProps(state) {
   /* Populated by react-webpack-redux:reducer */
-  const props = {};
+  const props = { spotify: state.spotify };
   return props;
 }
 function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
-  const actions = {};
+  const actions = { spotify: require('../actions/spotify.js') };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
+  console.log(actionMap);
   return actionMap;
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
