@@ -1,0 +1,13 @@
+{
+    "preset": "airbnb",
+    "excludeFiles": [
+        "__specs__",
+        "__tests__",
+        "test-helpers",
+        "node_modules",
+        "build",
+        "webpack.config.js",
+        "karma.conf.js",
+        "dev-server.js"
+    ]
+}
