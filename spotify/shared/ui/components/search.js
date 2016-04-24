@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { search } from '../../redux/actions/spotify';
+import AlbumListItem from './album-list-item';
 
 class Search extends Component {
   constructor(props) {
@@ -24,12 +25,25 @@ class Search extends Component {
     });
   }
 
+  renderAlbums() {
+    const { searchResults } = this.props;
+    return searchResults.response.albums.map(album => <AlbumListItem
+      key = {album.id}
+      id = {album.id}
+      name = {album.name}
+      image = {album.images[0].url}
+    />);
+  }
+
   render() {
+    const { searchResults } = this.props;
+    const loader = <img src = "/static-media/ajax-loader.gif" />;
     return (
       <form onSubmit={this.submit}>
         <input type="text" value={this.state.query} onChange={this.queryChange} />
         <button>Search</button>
-        <img src="/static-media/ajax-loader.gif" />
+        {searchResults.loading ? loader : ''}
+        {searchResults.response ? this.renderAlbums() : ''}
       </form>
     );
   }
@@ -37,7 +51,8 @@ class Search extends Component {
 
 Search.propTypes = {
   dispatch: PropTypes.func,
+  searchResults: PropTypes.object,
 };
 
-const mapStateToProps = state => ({ search: state.search });
+const mapStateToProps = state => ({ searchResults: state.spotify.search.toJS() });
 export default connect(mapStateToProps)(Search);
