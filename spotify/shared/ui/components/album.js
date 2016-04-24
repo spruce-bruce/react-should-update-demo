@@ -1,4 +1,4 @@
-/* eslint no-console:0, react/prop-types:0 */
+/* eslint react/prop-types:0 */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAlbum } from '../../redux/actions/spotify';
