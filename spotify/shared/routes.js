@@ -6,6 +6,7 @@ import SiteLayout from './ui/layouts/site';
 import HomePage from './ui/pages/home';
 import PatternLibraryPage from './ui/pages/pattern-library';
 import NotFoundPage from './ui/pages/404';
+import Search from './ui/components/search';
 
 /* eslint-disable */
 function getEnvironmentDependentRoutes() {
@@ -26,6 +27,8 @@ function getEnvironmentDependentRoutes() {
 export default (
   <Route path="/" component={SiteLayout}>
     <IndexRoute component={HomePage}/>
+    <Route path="search" component={Search} />
+
     {getEnvironmentDependentRoutes()}
     <Route path="*" component={NotFoundPage}/>
   </Route>
