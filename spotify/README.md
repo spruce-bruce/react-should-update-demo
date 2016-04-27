@@ -11,7 +11,7 @@ Inspect state, time travel through various actions. Enabled by default for devel
 
 ### Initializing the Development Environment
 1. `npm install` to add dependencies
-1. `npm start` to build the app and launch a server at `localhost:9000`
+1. `npm run start:shared` to build the app and launch a server at `localhost:9000`
 
 ### Builds
 1. `npm run dist` to build a production bundle
